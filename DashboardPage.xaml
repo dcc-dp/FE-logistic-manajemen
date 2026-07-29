@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WmsApp.DashboardPage"
+             Title="DashboardPage"
+             NavigationPage.HasBackButton="False">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center">
+
+            <Label Text="WMS Mobile" 
+                   FontSize="28" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" />
+
+            <Label Text="Pilih Menu Operasional" 
+                   FontSize="16" 
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,20"/>
+
+            <Grid RowDefinitions="Auto, Auto" 
+                  ColumnDefinitions="*, *" 
+                  RowSpacing="15" 
+                  ColumnSpacing="15">
+
+                <Button Grid.Row="0" Grid.Column="0" 
+                        Text="Barang Masuk" 
+                        HeightRequest="120" 
+                        CornerRadius="15" 
+                        BackgroundColor="#2196F3" 
+                        FontAttributes="Bold"
+                        Clicked="OnMenuClicked" />
+
+                <Button Grid.Row="0" Grid.Column="1" 
+                        Text="Barang Keluar" 
+                        HeightRequest="120" 
+                        CornerRadius="15" 
+                        BackgroundColor="#F44336"
+                        FontAttributes="Bold"
+                        Clicked="OnMenuClicked" />
+
+                <Button Grid.Row="1" Grid.Column="0" 
+                        Text="Stock Opname" 
+                        HeightRequest="120" 
+                        CornerRadius="15" 
+                        BackgroundColor="#FF9800"
+                        FontAttributes="Bold"
+                        Clicked="OnMenuClicked" />
+
+                <Button Grid.Row="1" Grid.Column="1" 
+                        Text="Keluar (Logout)" 
+                        HeightRequest="120" 
+                        CornerRadius="15" 
+                        BackgroundColor="#9E9E9E"
+                        FontAttributes="Bold"
+                        Clicked="OnLogoutClicked" />
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

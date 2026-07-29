@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WmsApp.MainPage"
+             BackgroundColor="#0f1117"
+             NavigationPage.HasNavigationBar="False">
+
+    <Grid>
+        <!-- Garis Gradasi di Paling Atas (Top Accent Bar) -->
+        <BoxView HeightRequest="4" VerticalOptions="Start" HorizontalOptions="Fill">
+            <BoxView.Background>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <GradientStop Color="#2563eb" Offset="0.0" />
+                    <GradientStop Color="#3b82f6" Offset="0.5" />
+                    <GradientStop Color="#60a5fa" Offset="1.0" />
+                </LinearGradientBrush>
+            </BoxView.Background>
+        </BoxView>
+
+        <Grid RowDefinitions="*, Auto" Padding="30, 40, 30, 30">
+
+            <ScrollView Grid.Row="0" VerticalScrollBarVisibility="Never">
+                <VerticalStackLayout Spacing="0" VerticalOptions="Center">
+
+                    <!-- Logo Kotak Gradasi -->
+                    <Border StrokeThickness="0" WidthRequest="80" HeightRequest="80" HorizontalOptions="Center" Margin="0,20,0,20">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="20" />
+                        </Border.StrokeShape>
+                        <Border.Background>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                <GradientStop Color="#1d3a7a" Offset="0.0" />
+                                <GradientStop Color="#2563eb" Offset="1.0" />
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <Border.Shadow>
+                            <Shadow Brush="#2563eb" Radius="32" Opacity="0.4" Offset="0,8" />
+                        </Border.Shadow>
+                        <!-- Menggunakan icon bawaan sementara, ganti dengan SVG Gudang Anda nanti -->
+                        <Image Source="dotnet_bot.png" WidthRequest="40" HeightRequest="40" VerticalOptions="Center" HorizontalOptions="Center" />
+                    </Border>
+
+                    <!-- Judul WMSPro -->
+                    <Label HorizontalOptions="Center" FontSize="28" FontAttributes="Bold" CharacterSpacing="-0.5">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="WMS" TextColor="#e8eaf0" />
+                                <Span Text="Pro" TextColor="#2563eb" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Text="WAREHOUSE MANAGEMENT" TextColor="#8891b0" FontSize="12" FontFamily="Consolas" CharacterSpacing="1" HorizontalOptions="Center" Margin="0,4,0,40" />
+
+                    <!-- Teks Header -->
+                    <Label Text="Masuk ke Akun" TextColor="#e8eaf0" FontSize="22" FontAttributes="Bold" Margin="0,0,0,4" />
+                    <Label Text="Gunakan kredensial yang diberikan supervisor Anda." TextColor="#8891b0" FontSize="14" Margin="0,0,0,24" />
+
+                    <!-- Kotak Alert Error (Hidden by default) -->
+                    <Border x:Name="ErrorBox" IsVisible="False" BackgroundColor="#26dc2626" Stroke="#4ddc2626" StrokeThickness="1" Margin="0,0,0,20" Padding="16,12">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="12" />
+                        </Border.StrokeShape>
+                        <Label x:Name="ErrorLabel" TextColor="#f87171" FontSize="14" FontAttributes="Bold" />
+                    </Border>
+
+                    <!-- Input Email -->
+                    <Label Text="EMAIL" TextColor="#8891b0" FontSize="12" FontAttributes="Bold" CharacterSpacing="1" Margin="0,0,0,8" />
+                    <Border x:Name="EmailBorder" BackgroundColor="#22263a" Stroke="#2e3350" StrokeThickness="1.5" HeightRequest="56" Padding="18,0" Margin="0,0,0,20">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+                        <Entry x:Name="EmailEntry"
+                               Placeholder="budi@gudang.co.id"
+                               PlaceholderColor="#4a5080"
+                               TextColor="#e8eaf0"
+                               Keyboard="Email"
+                               BackgroundColor="Transparent"
+                               VerticalOptions="Center"
+                               Focused="OnEntryFocused"
+                               Unfocused="OnEntryUnfocused" />
+                    </Border>
+
+                    <!-- Input Password -->
+                    <Label Text="PASSWORD" TextColor="#8891b0" FontSize="12" FontAttributes="Bold" CharacterSpacing="1" Margin="0,0,0,8" />
+                    <Border x:Name="PasswordBorder" BackgroundColor="#22263a" Stroke="#2e3350" StrokeThickness="1.5" HeightRequest="56" Padding="18,0,10,0" Margin="0,0,0,10">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="14" />
+                        </Border.StrokeShape>
+                        <Grid ColumnDefinitions="*, Auto">
+                            <Entry x:Name="PasswordEntry"
+                                   Grid.Column="0"
+                                   Placeholder="••••••••"
+                                   PlaceholderColor="#4a5080"
+                                   TextColor="#e8eaf0"
+                                   IsPassword="True"
+                                   BackgroundColor="Transparent"
+                                   VerticalOptions="Center"
+                                   Focused="OnEntryFocused"
+                                   Unfocused="OnEntryUnfocused" />
+
+                            <ImageButton x:Name="EyeIcon" Grid.Column="1" Source="eye_closed.png" WidthRequest="100" HeightRequest="100" BackgroundColor="Transparent" Clicked="OnTogglePasswordClicked" VerticalOptions="Center" Margin="0,0,8,0" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Lupa Password -->
+                    <Label Text="Lupa Password?" TextColor="#3b82f6" FontSize="14" FontAttributes="Bold" HorizontalOptions="End" Margin="0,0,0,30">
+                        <Label.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnLupaPasswordClicked" />
+                        </Label.GestureRecognizers>
+                    </Label>
+
+                    <!-- Tombol Login Bergradasi -->
+                    <Grid HeightRequest="56">
+                        <Button x:Name="LoginBtn"
+                                CornerRadius="16"
+                                Clicked="OnLoginClicked"
+                                TextColor="Transparent">
+                            <!-- Teks asli disembunyikan, kita pakai Grid di atasnya agar bisa ditaruh ActivityIndicator -->
+                            <Button.Background>
+                                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                                    <GradientStop Color="#1d4ed8" Offset="0.0" />
+                                    <GradientStop Color="#2563eb" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Button.Background>
+                            <Button.Shadow>
+                                <Shadow Brush="#2563eb" Radius="24" Opacity="0.4" Offset="0,8" />
+                            </Button.Shadow>
+                        </Button>
+
+                        <!-- Konten di dalam tombol (Teks & Spinner) -->
+                        <HorizontalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="10">
+                            <ActivityIndicator x:Name="LoadingSpinner" IsRunning="False" IsVisible="False" Color="White" WidthRequest="20" HeightRequest="20" />
+                            <Label x:Name="LoginBtnText" Text="LOGIN" TextColor="White" FontSize="16" FontAttributes="Bold" CharacterSpacing="1" VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Footer -->
+            <Label Grid.Row="1" Text="v2.4.1 · CONFIDENTIAL · INTERNAL USE ONLY" TextColor="#4a5080" FontSize="10" FontFamily="Consolas" HorizontalOptions="Center" CharacterSpacing="1" />
+
+        </Grid>
+    </Grid>
+</ContentPage>
